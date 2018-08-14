@@ -1,65 +1,30 @@
-# Angularng6O2chartdemo
-This project explains how to create angular dashboard and use d3.js and ng6O2 chart library.
-
-### Application Demo
-
-**Step 1:** Create a new angular project 
-```
-ng new angularng6O2chartdemo
-
-```
-**Step 2:** Add angular material 
-```
-npm install --save @angular/material @angular/cdk @angular/animations
-```
-**Step 3:** Add Dashboard into the project
-```
-ng generate @angular/material:material-dashboard --name <component-name>
-```
-**Step 4:** Add d3.js for chart support
-```
-npm install d3@4.3.0 --save
-```
-**Step 5:** Add ng6-o2-chart library
-```
-npm install ng6-o2-chart --save
-```
-**Step 6:** Add Ng6O2ChartModule in app.module.ts
-```
+import { Component, OnInit } from '@angular/core';
 import { Ng6O2ChartModule } from 'ng6-o2-chart';
-imports: [
-    BrowserModule,
-    Ng6O2ChartModule   // <= Add
-  ]
 
-```
-**Step 7:** Add css in styles.css file
 
-**Step 8:** I have created 3 components 
-
-        * Barchart
-        * Piechart
-        * Scatterplotchart
-
-**Step 9:** Here I do explain with Barchart
-
-**barchart.component.ts**
-
-```
-import { Ng6O2ChartModule } from 'ng6-o2-chart';
 import * as  ChartConst from 'ng6-o2-chart';
+
+@Component({
+  selector: 'app-scatterplotchart',
+  templateUrl: './scatterplotchart.component.html',
+  styleUrls: ['./scatterplotchart.component.css']
+})
+export class ScatterplotchartComponent implements OnInit {
 
   chartType: string;
   configData: any;
-  barDataJson: any;
-  barTypeName: string;
+  scatterPlotDataJson: any;
+  scatterPlotTypeName: string;
 
   constructor() {
-    this.barTypeName = ChartConst.BAR_CHART_TYPE_NAME;
-    this.barData();
+    this.scatterPlotTypeName 	= ChartConst.SCATTER_PLOT_CHART_TYPE_NAME;
+    this.scatterData();
+   }
+
+  ngOnInit() {
   }
 
-private barData() {
+  private scatterData() {
     this.configData = {
       // tslint:disable-next-line:quotemark
       "className": {
@@ -85,8 +50,8 @@ private barData() {
           'display': true,
       },
       'title': {
-        'display': true,
-        'name': 'Bar Chart',
+        'display': false,
+        'name': 'Title',
         'className': 'chart-title',
         'height': 30,
         'leftMargin': -20,
@@ -186,65 +151,41 @@ private barData() {
       },
     };
 
-    this.barDataJson = {
+    this.scatterPlotDataJson = {
       'series': [
-        'Dutch',
-        'German'
+        'series A',
+        'series B',
+        'series C'
       ],
       'data': [
         {
-          'x': 'Peter',
-          'y': [82, 63],
+          'name': 'Aadi',
+          'value': [
+            {'x': 30, 'y': 40, 'r': 5},
+            {'x': 120, 'y': 115, 'r': 10},
+            {'x': 125, 'y': 90, 'r': 2},
+            {'x': 150, 'y': 160, 'r': 1},
+            {'x': 150, 'y': 160, 'r': 3},
+            {'x': 128, 'y': 115, 'r': 5},
+            {'x': 130, 'y': 40, 'r': 15},
+            {'x': 170, 'y': 115, 'r': 25},
+          ]
         },
         {
-          'x': 'Dave',
-          'y': [79, 55],
-        },
-        {
-          'x': 'Alma',
-          'y': [70, 100],
-        },
-        {
-          'x': 'Joe',
-          'y': [33, 56],
-        },
-        {
-          'x': 'Johan',
-          'y': [60, 70],
-        },
-        {
-          'x': 'Kevin',
-          'y': [47, 73],
+          'name': 'BMW',
+          'value': [
+            {'x': 130, 'y': 140, 'r': 5},
+            {'x': 20, 'y': 15, 'r': 10},
+            {'x': 25, 'y': 170, 'r': 2},
+            {'x': 150, 'y': 60, 'r': 1},
+            {'x': 50, 'y': 60, 'r': 3},
+            {'x': 28, 'y': 15, 'r': 5},
+            {'x': 130, 'y': 140, 'r': 15},
+            {'x': 20, 'y': 115, 'r': 25},
+          ]
         },
       ],
     };
+  }
+
 }
-```
-
-**barchart.component.html**
-
-```
-<lib-Ng6O2Chart [chartType]="barTypeName" [configData]="configData"  [graphData]="barDataJson" [svgWidth]="'650'" [svgHeight]="'250'"></lib-Ng6O2Chart>
-```
-**chart-dashboard.component.html**
-
-```
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Bar
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div><app-barchart></app-barchart></div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-```
-
-### Screenshots
-![chart.gif](chart.gif)
-
-
-### Happy Coding

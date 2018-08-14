@@ -1,65 +1,29 @@
-# Angularng6O2chartdemo
-This project explains how to create angular dashboard and use d3.js and ng6O2 chart library.
-
-### Application Demo
-
-**Step 1:** Create a new angular project 
-```
-ng new angularng6O2chartdemo
-
-```
-**Step 2:** Add angular material 
-```
-npm install --save @angular/material @angular/cdk @angular/animations
-```
-**Step 3:** Add Dashboard into the project
-```
-ng generate @angular/material:material-dashboard --name <component-name>
-```
-**Step 4:** Add d3.js for chart support
-```
-npm install d3@4.3.0 --save
-```
-**Step 5:** Add ng6-o2-chart library
-```
-npm install ng6-o2-chart --save
-```
-**Step 6:** Add Ng6O2ChartModule in app.module.ts
-```
+import { Component, OnInit } from '@angular/core';
 import { Ng6O2ChartModule } from 'ng6-o2-chart';
-imports: [
-    BrowserModule,
-    Ng6O2ChartModule   // <= Add
-  ]
 
-```
-**Step 7:** Add css in styles.css file
 
-**Step 8:** I have created 3 components 
-
-        * Barchart
-        * Piechart
-        * Scatterplotchart
-
-**Step 9:** Here I do explain with Barchart
-
-**barchart.component.ts**
-
-```
-import { Ng6O2ChartModule } from 'ng6-o2-chart';
 import * as  ChartConst from 'ng6-o2-chart';
 
+@Component({
+  selector: 'app-piechart',
+  templateUrl: './piechart.component.html',
+  styleUrls: ['./piechart.component.css']
+})
+export class PiechartComponent implements OnInit {
   chartType: string;
   configData: any;
-  barDataJson: any;
-  barTypeName: string;
+  pieDataJson: any;
+  pieTypeName: string;
 
   constructor() {
-    this.barTypeName = ChartConst.BAR_CHART_TYPE_NAME;
-    this.barData();
+    this.pieTypeName = ChartConst.PIE_CHART_TYPE_NAME;
+    this.pieData();
   }
 
-private barData() {
+  ngOnInit() {
+  }
+
+  private pieData() {
     this.configData = {
       // tslint:disable-next-line:quotemark
       "className": {
@@ -85,8 +49,8 @@ private barData() {
           'display': true,
       },
       'title': {
-        'display': true,
-        'name': 'Bar Chart',
+        'display': false,
+        'name': 'Title',
         'className': 'chart-title',
         'height': 30,
         'leftMargin': -20,
@@ -186,65 +150,27 @@ private barData() {
       },
     };
 
-    this.barDataJson = {
-      'series': [
-        'Dutch',
-        'German'
-      ],
+    this.pieDataJson = {
       'data': [
         {
-          'x': 'Peter',
-          'y': [82, 63],
+          'name': 'macOS',
+          'value': 30,
         },
         {
-          'x': 'Dave',
-          'y': [79, 55],
+          'name': 'Linux',
+          'value': 25
         },
         {
-          'x': 'Alma',
-          'y': [70, 100],
+          'name': 'Windows',
+          'value': 16
         },
         {
-          'x': 'Joe',
-          'y': [33, 56],
-        },
-        {
-          'x': 'Johan',
-          'y': [60, 70],
-        },
-        {
-          'x': 'Kevin',
-          'y': [47, 73],
+          'name': 'Android',
+          'value': 4
         },
       ],
     };
+
+  }
+
 }
-```
-
-**barchart.component.html**
-
-```
-<lib-Ng6O2Chart [chartType]="barTypeName" [configData]="configData"  [graphData]="barDataJson" [svgWidth]="'650'" [svgHeight]="'250'"></lib-Ng6O2Chart>
-```
-**chart-dashboard.component.html**
-
-```
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Bar
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div><app-barchart></app-barchart></div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-```
-
-### Screenshots
-![chart.gif](chart.gif)
-
-
-### Happy Coding

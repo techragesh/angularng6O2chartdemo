@@ -1,65 +1,30 @@
-# Angularng6O2chartdemo
-This project explains how to create angular dashboard and use d3.js and ng6O2 chart library.
-
-### Application Demo
-
-**Step 1:** Create a new angular project 
-```
-ng new angularng6O2chartdemo
-
-```
-**Step 2:** Add angular material 
-```
-npm install --save @angular/material @angular/cdk @angular/animations
-```
-**Step 3:** Add Dashboard into the project
-```
-ng generate @angular/material:material-dashboard --name <component-name>
-```
-**Step 4:** Add d3.js for chart support
-```
-npm install d3@4.3.0 --save
-```
-**Step 5:** Add ng6-o2-chart library
-```
-npm install ng6-o2-chart --save
-```
-**Step 6:** Add Ng6O2ChartModule in app.module.ts
-```
+import { Component, OnInit } from '@angular/core';
 import { Ng6O2ChartModule } from 'ng6-o2-chart';
-imports: [
-    BrowserModule,
-    Ng6O2ChartModule   // <= Add
-  ]
 
-```
-**Step 7:** Add css in styles.css file
 
-**Step 8:** I have created 3 components 
-
-        * Barchart
-        * Piechart
-        * Scatterplotchart
-
-**Step 9:** Here I do explain with Barchart
-
-**barchart.component.ts**
-
-```
-import { Ng6O2ChartModule } from 'ng6-o2-chart';
 import * as  ChartConst from 'ng6-o2-chart';
+
+@Component({
+  selector: 'app-histogramchart',
+  templateUrl: './histogramchart.component.html',
+  styleUrls: ['./histogramchart.component.css']
+})
+export class HistogramchartComponent implements OnInit {
 
   chartType: string;
   configData: any;
-  barDataJson: any;
-  barTypeName: string;
+  histogramDataJson: any;
+  histogramTypeName: string;
 
   constructor() {
-    this.barTypeName = ChartConst.BAR_CHART_TYPE_NAME;
-    this.barData();
+    this.histogramTypeName     = ChartConst.HISTOGRAM_CHART_TYPE_NAME;
+    this.histogramData();
   }
 
-private barData() {
+  ngOnInit() {
+  }
+
+  private histogramData() {
     this.configData = {
       // tslint:disable-next-line:quotemark
       "className": {
@@ -85,8 +50,8 @@ private barData() {
           'display': true,
       },
       'title': {
-        'display': true,
-        'name': 'Bar Chart',
+        'display': false,
+        'name': 'Title',
         'className': 'chart-title',
         'height': 30,
         'leftMargin': -20,
@@ -186,65 +151,21 @@ private barData() {
       },
     };
 
-    this.barDataJson = {
-      'series': [
-        'Dutch',
-        'German'
-      ],
-      'data': [
-        {
-          'x': 'Peter',
-          'y': [82, 63],
-        },
-        {
-          'x': 'Dave',
-          'y': [79, 55],
-        },
-        {
-          'x': 'Alma',
-          'y': [70, 100],
-        },
-        {
-          'x': 'Joe',
-          'y': [33, 56],
-        },
-        {
-          'x': 'Johan',
-          'y': [60, 70],
-        },
-        {
-          'x': 'Kevin',
-          'y': [47, 73],
-        },
-      ],
+    this.histogramDataJson = {
+    	'range': [0, 100],
+    	'bins': [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    	'data': [
+        54, 94, 69, 45, 62, 51, 36, 21, 11, 8,
+        56, 72, 65, 42, 25, 33, 45, 53, 52, 89,
+        90, 55, 52, 55, 65, 70, 43, 35, 15, 45,
+        50, 95, 65, 44, 60, 50, 35, 20, 10, 8,
+        56, 70, 65, 42, 22, 33, 40, 53, 52, 89,
+        90, 55, 50, 55, 65, 72, 45, 35, 15, 45,
+        50, 95, 60, 44, 60, 50, 35, 20, 10, 8,
+        56, 70, 65, 42, 22, 33, 40, 53, 52, 89,
+        90, 55, 55, 55, 65, 72, 45, 35, 15, 45,
+    	],
     };
+  }
+
 }
-```
-
-**barchart.component.html**
-
-```
-<lib-Ng6O2Chart [chartType]="barTypeName" [configData]="configData"  [graphData]="barDataJson" [svgWidth]="'650'" [svgHeight]="'250'"></lib-Ng6O2Chart>
-```
-**chart-dashboard.component.html**
-
-```
-    <mat-grid-tile colspan="2" rowspan="1">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            Bar
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div><app-barchart></app-barchart></div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-```
-
-### Screenshots
-![chart.gif](chart.gif)
-
-
-### Happy Coding

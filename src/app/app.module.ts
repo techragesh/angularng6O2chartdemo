@@ -7,12 +7,18 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButt
 import { LayoutModule } from '@angular/cdk/layout';
 import { BarchartComponent } from './barchart/barchart.component';
 import { Ng6O2ChartModule } from 'ng6-o2-chart';
+import { PiechartComponent } from './piechart/piechart.component';
+import { HistogramchartComponent } from './histogramchart/histogramchart.component';
+import { ScatterplotchartComponent } from './scatterplotchart/scatterplotchart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartDashboardComponent,
-    BarchartComponent
+    BarchartComponent,
+    PiechartComponent,
+    HistogramchartComponent,
+    ScatterplotchartComponent
   ],
   imports: [
     BrowserModule,
